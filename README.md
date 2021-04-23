@@ -56,6 +56,6 @@ Use [@StringSessionGeneratorRobot](https://t.me/StringSessionGeneratorRobot) to 
 <details>
 
 <summary> • 🔥CREDITS🔥 • </summary>
-<h2 align="center"> <a href="https://github.com/xxMUNNAxx">🔥 MUNNA TRIPATHI 🔥</a></h2><h2 align="center"> <a href="https://github.com/dineshpamnani860">🔥 Lucifer 🔥</a></h2>
+<h2 align="center"> <a href="https://github.com/xxMUNNAxx">🔥 MUNNA TRIPATHI 🔥</a></h2><h2 align="center"> <a href="https://github.com/dineshpamnani860">🔥 Lucifer 🔥</a></h2><h2 align="center"> <a href="https://github.com/Omiiiiii143">🔥 Smokie 🔥</a></h2>
 
 </details>
