@@ -426,26 +426,6 @@ async def play(_, message: Message):
 
     sender_name = message.from_user.first_name
 
-    keyboard = InlineKeyboardMarkup(
-
-            [
-
-                [
-
-                    InlineKeyboardButton(
-
-                        text="🔥𝕐𝖔𝖚𝖗 - 𝕯𝖆𝖉𝖉𝕪🔥",
-
-                        url="https://t.me/FallenAngel_xD")
-
-                   
-
-                ]
-
-            ]
-
-        )
-
 
 @Client.on_message(command("ytp") & other_filters)
 async def play(_, message: Message):
