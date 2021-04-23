@@ -34,9 +34,9 @@
 - `/saavn <song name>` - download songs you want quickly via saavn
 - `/video <song name>` - download videos you want quickly
 
-<details>
 
-<summary> •Admins only • </summary>
+
+### Admins only 
 - `/player` - open music player settings panel
 - `/pause` - pause song play
 - `/resume` - resume song play
@@ -45,7 +45,7 @@
 - `/userbotjoin` - invite assistant to your chat
 - `/admincache` - Refresh admin list
 
-</details>
+
 
 #### Based on Callsmusic-1
 
