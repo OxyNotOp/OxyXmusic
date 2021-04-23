@@ -39,7 +39,7 @@ async def addchannel(client, message):
     try:
         user = await USER.get_me()
     except:
-        user.first_name =  "DaisyMusic"
+        user.first_name =  " 𝕺𝖝𝕪 "
 
     try:
         await USER.join_chat(invitelink)
@@ -52,7 +52,7 @@ async def addchannel(client, message):
         print(e)
         await message.reply_text(
             f"<b>User {user.first_name} couldn't join your group! Make sure user is not banned in group."
-            "\n\nOr manually add @DaisyXhelper to your Group and try again</b>",
+            "\n\nOr manually add @Oxy_VC to your Group and try again</b>",
         )
         return
     await message.reply_text(
