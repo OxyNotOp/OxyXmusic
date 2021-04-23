@@ -1,4 +1,4 @@
-<h1 align="centre">DAISYXMUSIC V3 🎵</h1>
+<h1 align="centre">OXYxMUSIC 🎵</h1>
 
 ### A bot that can play music on telegram group's voice call
 
