@@ -5,7 +5,7 @@
 # Available on telegram as @Music_op_bot
 
 <p align="center">
-  <img src="https://telegra.ph/file/dd04b1968f1bc1169d162.jpg">
+  <img src="https://telegra.ph/file/965dfc5005cd4facef437.jpg">
 </p>
 
 <h2> Whats new 🔥 </h2>
