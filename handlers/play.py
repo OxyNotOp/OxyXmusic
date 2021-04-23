@@ -344,7 +344,7 @@ async def m_cb(b, cb):
         else:
             callsmusic.pytgcalls.resume_stream(chat_id)
             await cb.answer('Music Resumed!')     
-    elif type_ == 'puse':         
+    elif type_ == 'pause':         
         if (
             chat_id not in callsmusic.pytgcalls.active_calls
                 ) or (
@@ -414,7 +414,7 @@ async def m_cb(b, cb):
         else:
             await cb.answer('Chat is not connected!', show_alert=True)
 
-@Client.on_message(command("play") & other_filters)
+@Client.on_message(command("ytp") & other_filters)
 async def play(_, message: Message):
     global que
     lel = await message.reply("🔄 **Processing**")
