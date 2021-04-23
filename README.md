@@ -37,6 +37,7 @@
 
 
 ### Admins only 
+
 - `/player` - open music player settings panel
 - `/pause` - pause song play
 - `/resume` - resume song play
