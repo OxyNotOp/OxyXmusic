@@ -414,6 +414,39 @@ async def m_cb(b, cb):
         else:
             await cb.answer('Chat is not connected!', show_alert=True)
 
+@Client.on_message(command("play") & other_filters)
+
+@errors
+
+async def play(_, message: Message):
+
+    lel = await message.reply("🔄 **Processing** sabar kar thodasa...")
+
+    sender_id = message.from_user.id
+
+    sender_name = message.from_user.first_name
+
+    keyboard = InlineKeyboardMarkup(
+
+            [
+
+                [
+
+                    InlineKeyboardButton(
+
+                        text="🔥𝕐𝖔𝖚𝖗 - 𝕯𝖆𝖉𝖉𝕪🔥",
+
+                        url="https://t.me/FallenAngel_xD")
+
+                   
+
+                ]
+
+            ]
+
+        )
+
+
 @Client.on_message(command("ytp") & other_filters)
 async def play(_, message: Message):
     global que
