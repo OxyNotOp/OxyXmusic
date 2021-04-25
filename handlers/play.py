@@ -344,7 +344,7 @@ async def m_cb(b, cb):
         else:
             callsmusic.pytgcalls.resume_stream(chat_id)
             await cb.answer('Music Resumed!')     
-    elif type_ == 'puse':         
+    elif type_ == 'puase':         
         if (
             chat_id not in callsmusic.pytgcalls.active_calls
                 ) or (
@@ -502,19 +502,19 @@ async def play(_, message: Message):
             [   
                 [
                                
-                    InlineKeyboardButton('📖 Playlist', callback_data='playlist'),
-                    InlineKeyboardButton('Menu ⏯ ', callback_data='menu')
+                    InlineKeyboardButton('📖 ρℓαуℓιѕт', callback_data='playlist'),
+                    InlineKeyboardButton('мєиυ ⏯ ', callback_data='menu')
                 
                 ],                     
                 [
                     InlineKeyboardButton(
-                        text="Watch On YouTube 🎬",
+                        text="ωαт¢н σи уσυтυвє 🎬",
                         url=f"{url}")
 
                 ],
                 [       
                     InlineKeyboardButton(
-                        text="❌ Close",
+                        text="❌ ¢ℓσѕє",
                         callback_data='cls')
 
                 ]                             
