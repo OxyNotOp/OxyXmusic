@@ -19,7 +19,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 @errors
 async def play(_, message: Message):
 
-    lel = await message.reply("🔄 **Processing** sabar kar thodasa...")
+    lel = await message.reply("🔄 **Processing**")
     sender_id = message.from_user.id
     sender_name = message.from_user.first_name
 
@@ -51,7 +51,7 @@ async def play(_, message: Message):
     elif url:
         file_path = await converter.convert(youtube.download(url))
     else:
-        return await lel.edit_text("❗ Are play karne kuch de to sahi..🙄")
+        return await lel.edit_text("❗ Abey play karne kuch de to sahi noob 😂")
 
     if message.chat.id in callsmusic.pytgcalls.active_calls:
         position = await queues.put(message.chat.id, file=file_path)
@@ -61,7 +61,7 @@ async def play(_, message: Message):
         await message.reply_photo(
         photo="https://telegra.ph/file/fa90d4ed2fac4f5300d76.jpg",
         reply_markup=keyboard,
-        caption="▶️ **Playing** le tera song sun ab..🔥{}!".format(
+        caption="▶️ **Playing** here the song requested by🔥{}!".format(
         message.from_user.mention()
         ),
     )
