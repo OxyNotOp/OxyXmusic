@@ -32,5 +32,5 @@ API_HASH = getenv("API_HASH")
 DURATION_LIMIT = int(getenv("DURATION_LIMIT", "7"))
 
 COMMAND_PREFIXES = list(getenv("COMMAND_PREFIXES", "/ !").split())
-ARQ_API_KEY = getenv("ARQ_API_KEY", "VKSSQH-SRNJYZ-MSOJAI-QALESR-ARQ")
+
 SUDO_USERS = list(map(int, getenv("SUDO_USERS").split()))
