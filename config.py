@@ -24,7 +24,7 @@ que = {}
 SESSION_NAME = getenv("SESSION_NAME", "session")
 BOT_TOKEN = getenv("BOT_TOKEN")
 BOT_NAME = getenv("BOT_NAME")
-BG_IMAGE = getenv("BG_IMAGE", "https://telegra.ph/file/a76
+
 admins = {}
 API_ID = int(getenv("API_ID"))
 API_HASH = getenv("API_HASH")
