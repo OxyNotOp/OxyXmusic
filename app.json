@@ -17,11 +17,11 @@
       "description": "Your MusicPlayer Bot Name.",
       "required": false,
       "value": ""
-    },
-    "ARQ_API_KEY": {
-      "description": "Get from @ARQRobot.",
-      "required": false,
-      "value": ""
+
+
+
+
+
     },
     "API_ID": {
       "description": "App ID from my.telegram.org/apps",
