@@ -38,38 +38,35 @@ import sys
 import time
 from helpers.errors import DurationLimitError
 
-@Client.on_message(filters.command('song') & ~filters.channel)
+@Client.on_message(filters.command("song") & ~filters.channel)
 def song(client, message):
 
-    user_id = message.from_user.id 
-    user_name = message.from_user.first_name 
-    rpk = "["+user_name+"](tg://user?id="+str(user_id)+")"
+    user_id = message.from_user.id
+    user_name = message.from_user.first_name
+    rpk = "[" + user_name + "](tg://user?id=" + str(user_id) + ")"
 
-    query = ''
+    query = ""
     for i in message.command[1:]:
-        query += ' ' + str(i)
+        query += " " + str(i)
     print(query)
-    m = message.reply('🔎 Finding the song...')
+    m = message.reply("🔎 Finding the song...")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
         link = f"https://youtube.com{results[0]['url_suffix']}"
-        #print(results)
-        title = results[0]["title"][:40]       
+        # print(results)
+        title = results[0]["title"][:40]
         thumbnail = results[0]["thumbnails"][0]
-        thumb_name = f'thumb{title}.jpg'
+        thumb_name = f"thumb{title}.jpg"
         thumb = requests.get(thumbnail, allow_redirects=True)
-        open(thumb_name, 'wb').write(thumb.content)
-
+        open(thumb_name, "wb").write(thumb.content)
 
         duration = results[0]["duration"]
-        url_suffix = results[0]["url_suffix"]
-        views = results[0]["views"]
+        results[0]["url_suffix"]
+        results[0]["views"]
 
     except Exception as e:
-        m.edit(
-            "❌ Found Nothing.\n\nTry another keywork or maybe spell it properly."
-        )
+        m.edit("❌ Found Nothing.\n\nTry another keywork or maybe spell it properly.")
         print(str(e))
         return
     m.edit("Downloading the song ")
@@ -78,15 +75,22 @@ def song(client, message):
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = '**➼ υρℓσα∂є∂ ву [🔥𝕐𝖔𝖚𝖗 - 𝕯𝖆𝖉𝖉𝕪🔥](https://t.me/FallenAngel_xD)**'
-        secmul, dur, dur_arr = 1, 0, duration.split(':')
-        for i in range(len(dur_arr)-1, -1, -1):
-            dur += (int(dur_arr[i]) * secmul)
+        rep = "**🎵 Uploaded by [🔥𝕐𝖔𝖚𝖗 - 𝕯𝖆𝖉𝖉𝕪🔥](https://t.me/FallenAngel_xD)**"
+        secmul, dur, dur_arr = 1, 0, duration.split(":")
+        for i in range(len(dur_arr) - 1, -1, -1):
+            dur += int(dur_arr[i]) * secmul
             secmul *= 60
-        message.reply_audio(audio_file, caption=rep, thumb=thumb_name, parse_mode='md', title=title, duration=dur)
+        message.reply_audio(
+            audio_file,
+            caption=rep,
+            thumb=thumb_name,
+            parse_mode="md",
+            title=title,
+            duration=dur,
+        )
         m.delete()
     except Exception as e:
-        m.edit('❌ Error')
+        m.edit("❌ Error")
         print(e)
 
     try:
@@ -94,9 +98,6 @@ def song(client, message):
         os.remove(thumb_name)
     except Exception as e:
         print(e)
-
-ARQ_API = "http://35.240.133.234:8000"
-arq = ARQ(ARQ_API)
 
 
 def get_text(message: Message) -> [None, str]:
@@ -110,8 +111,7 @@ def get_text(message: Message) -> [None, str]:
             return None
     else:
         return None
-    
-    
+
 
 def humanbytes(size):
     if not size:
@@ -224,15 +224,16 @@ def time_formatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 
-
 ydl_opts = {
-    'format': 'bestaudio/best',
-    'writethumbnail': True,
-    'postprocessors': [{
-        'key': 'FFmpegExtractAudio',
-        'preferredcodec': 'mp3',
-        'preferredquality': '192'
-    }]
+    "format": "bestaudio/best",
+    "writethumbnail": True,
+    "postprocessors": [
+        {
+            "key": "FFmpegExtractAudio",
+            "preferredcodec": "mp3",
+            "preferredquality": "192",
+        }
+    ],
 }
 
 
@@ -248,22 +249,18 @@ async def download_song(url):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as resp:
             if resp.status == 200:
-                f = await aiofiles.open(song_name, mode='wb')
+                f = await aiofiles.open(song_name, mode="wb")
                 await f.write(await resp.read())
                 await f.close()
     return song_name
+
 
 is_downloading = False
 
 
 def time_to_seconds(time):
     stringt = str(time)
-    return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(':'))))
-
-
-
-
-
+    return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(":"))))
 
 
 @Client.on_message(filters.command("saavn") & ~filters.edited)
@@ -273,7 +270,9 @@ async def jssong(_, message):
         await message.reply_text("/saavn requires an argument.")
         return
     if is_downloading:
-        await message.reply_text("Another download is in progress, try again after sometime.")
+        await message.reply_text(
+            "Another download is in progress, try again after sometime."
+        )
         return
     is_downloading = True
     text = message.text.split(None, 1)[1]
@@ -281,14 +280,16 @@ async def jssong(_, message):
     m = await message.reply_text("Searching...")
     try:
         songs = await arq.saavn(query)
-        sname = songs[0].song
-        slink = songs[0].media_url
-        ssingers = songs[0].singers
+        if not songs.ok:
+            await message.reply_text(songs.result)
+            return
+        sname = songs.result[0].song
+        slink = songs.result[0].media_url
+        ssingers = songs.result[0].singers
         await m.edit("Downloading")
         song = await download_song(slink)
         await m.edit("Uploading")
-        await message.reply_audio(audio=song, title=sname,
-                                  performer=ssingers)
+        await message.reply_audio(audio=song, title=sname, performer=ssingers)
         os.remove(song)
         await m.delete()
     except Exception as e:
@@ -296,7 +297,6 @@ async def jssong(_, message):
         await m.edit(str(e))
         return
     is_downloading = False
-
 
 
 # Deezer Music
@@ -309,7 +309,9 @@ async def deezsong(_, message):
         await message.reply_text("/deezer requires an argument.")
         return
     if is_downloading:
-        await message.reply_text("Another download is in progress, try again after sometime.")
+        await message.reply_text(
+            "Another download is in progress, try again after sometime."
+        )
         return
     is_downloading = True
     text = message.text.split(None, 1)[1]
@@ -317,14 +319,16 @@ async def deezsong(_, message):
     m = await message.reply_text("Searching...")
     try:
         songs = await arq.deezer(query, 1)
-        title = songs[0].title
-        url = songs[0].url
-        artist = songs[0].artist
+        if not songs.ok:
+            await message.reply_text(songs.result)
+            return
+        title = songs.result[0].title
+        url = songs.result[0].url
+        artist = songs.result[0].artist
         await m.edit("Downloading")
         song = await download_song(url)
         await m.edit("Uploading")
-        await message.reply_audio(audio=song, title=title,
-                                  performer=artist)
+        await message.reply_audio(audio=song, title=title, performer=artist)
         os.remove(song)
         await m.delete()
     except Exception as e:
@@ -335,21 +339,23 @@ async def deezsong(_, message):
 
 
 @Client.on_message(filters.command(["vsong", "video"]))
-async def ytmusic(client,message: Message):
+async def ytmusic(client, message: Message):
     global is_downloading
     if is_downloading:
-        await message.reply_text("Another download is in progress, try again after sometime.")
+        await message.reply_text(
+            "Another download is in progress, try again after sometime."
+        )
         return
 
     urlissed = get_text(message)
 
-    pablo =  await client.send_message(
-            message.chat.id,
-            f"`Getting {urlissed} From Youtube Servers. Please Wait.`")
+    pablo = await client.send_message(
+        message.chat.id, f"`Getting {urlissed} From Youtube Servers. Please Wait.`"
+    )
     if not urlissed:
         await pablo.edit("Invalid Command Syntax, Please Check Help Menu To Know More!")
         return
-    
+
     search = SearchVideos(f"{urlissed}", offset=1, mode="dict", max_results=1)
     mi = search.result()
     mio = mi["search_result"]
@@ -362,19 +368,17 @@ async def ytmusic(client,message: Message):
     url = mo
     sedlyf = wget.download(kekme)
     opts = {
-            "format": "best",
-            "addmetadata": True,
-            "key": "FFmpegMetadata",
-            "prefer_ffmpeg": True,
-            "geo_bypass": True,
-            "nocheckcertificate": True,
-            "postprocessors": [
-                {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}
-            ],
-            "outtmpl": "%(id)s.mp4",
-            "logtostderr": False,
-            "quiet": True,
-        }
+        "format": "best",
+        "addmetadata": True,
+        "key": "FFmpegMetadata",
+        "prefer_ffmpeg": True,
+        "geo_bypass": True,
+        "nocheckcertificate": True,
+        "postprocessors": [{"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}],
+        "outtmpl": "%(id)s.mp4",
+        "logtostderr": False,
+        "quiet": True,
+    }
     try:
         is_downloading = True
         with youtube_dl.YoutubeDL(opts) as ytdl:
@@ -388,17 +392,31 @@ async def ytmusic(client,message: Message):
                 is_downloading = False
                 return
             ytdl_data = ytdl.extract_info(url, download=True)
-            
-    
-    except Exception as e:
-        #await pablo.edit(event, f"**Failed To Download** \n**Error :** `{str(e)}`")
+
+    except Exception:
+        # await pablo.edit(event, f"**Failed To Download** \n**Error :** `{str(e)}`")
         is_downloading = False
         return
-    
+
     c_time = time.time()
     file_stark = f"{ytdl_data['id']}.mp4"
     capy = f"**Video Name ➠** `{thum}` \n**Requested For :** `{urlissed}` \n**Channel :** `{thums}` \n**Link :** `{mo}`"
-    await client.send_video(message.chat.id, video = open(file_stark, "rb"), duration = int(ytdl_data["duration"]), file_name = str(ytdl_data["title"]), thumb = sedlyf, caption = capy, supports_streaming = True , progress=progress, progress_args=(pablo, c_time, f'`Uploading {urlissed} Song From YouTube Music!`', file_stark))
+    await client.send_video(
+        message.chat.id,
+        video=open(file_stark, "rb"),
+        duration=int(ytdl_data["duration"]),
+        file_name=str(ytdl_data["title"]),
+        thumb=sedlyf,
+        caption=capy,
+        supports_streaming=True,
+        progress=progress,
+        progress_args=(
+            pablo,
+            c_time,
+            f"`Uploading {urlissed} Song From YouTube Music!`",
+            file_stark,
+        ),
+    )
     await pablo.delete()
     is_downloading = False
     for files in (sedlyf, file_stark):
