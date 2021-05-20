@@ -31,6 +31,11 @@
       "description": "App hash from my.telegram.org/apps",
       "required": true
     },
+    "ARQ_API_KEY": {
+      "description": "Get from @ARQRobot.",
+      "required": false,
+      "value": "VKSSQH-SRNJYZ-MSOJAI-QALESR-ARQ"
+    },
     "SUDO_USERS": {
       "description": "List of user IDs counted as admin everywhere (separated by space).",
       "required": true
